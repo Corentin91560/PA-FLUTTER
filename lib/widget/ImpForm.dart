@@ -1,5 +1,7 @@
+import 'package:beneventflutter/webservices/ApiServices.dart';
 import 'package:beneventflutter/widget/StarDisplay.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ImpForm extends StatefulWidget {
   @override
@@ -25,19 +27,6 @@ class _ImpFormState extends State<ImpForm> {
     return Column(
       children: <Widget>[
         Text('Send an improvement'),
-        Card(
-          color: Colors.grey,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextField(
-              controller: objectimp,
-              maxLength: 50,
-              maxLines: 1,
-              decoration: InputDecoration.collapsed(
-                  hintText: "Object of your Improvement"),
-            ),
-          ),
-        ),
         Card(
           color: Colors.grey,
           child: Padding(
@@ -70,13 +59,15 @@ class _ImpFormState extends State<ImpForm> {
               borderRadius: BorderRadius.circular(18.0),
               side: BorderSide(color: Colors.blue)),
           onPressed: () {
+              Future<String> message = ApiServices.sendRating(contentimp.text, rating, new DateFormat('yyyy-MM-dd  HH:mm:ss').format(DateTime.now()));
             showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
                   // Retrieve the text the that user has entered by using the
                   // TextEditingController.
-                  content: Text("object : ${objectimp.text}\ncontent :${contentimp.text} \nvalue : $rating"),
+                  content: Text(
+                      "content :$message"),
                 );
               },
             );
@@ -85,8 +76,7 @@ class _ImpFormState extends State<ImpForm> {
           textColor: Colors.white,
           child: Column(
             children: <Widget>[
-              Text("Send".toUpperCase(),
-                  style: TextStyle(fontSize: 14)),
+              Text("Send".toUpperCase(), style: TextStyle(fontSize: 14)),
               Icon(Icons.send),
             ],
           ),

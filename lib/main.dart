@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'page/Contact.dart';
-import 'page/Screen404.dart';
 import 'page/Home.dart';
 import 'page/Stat.dart';
 import 'page/Feedback.dart';
@@ -14,15 +13,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Benevent',
-      theme: ThemeData(
-        textTheme: TextTheme(
-          title: TextStyle(
-            color: Colors.amber,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
       routes: {
         "/": (BuildContext context) => Home(),
         Stat.routeName: (BuildContext context) => Stat(),
