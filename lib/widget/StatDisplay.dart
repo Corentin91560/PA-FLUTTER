@@ -1,21 +1,17 @@
-import 'package:beneventflutter/modele/News.dart';
+import 'package:beneventflutter/modele/Statistique.dart';
 import 'package:beneventflutter/webservices/ApiServices.dart';
-import 'package:beneventflutter/widget/NewsItem.dart';
 import 'package:flutter/material.dart';
 
-class ActuDisplay extends StatefulWidget {
-  @override
-  _ActuDisplayState createState() => _ActuDisplayState();
-}
+import 'StatItem.dart';
 
-class _ActuDisplayState extends State<ActuDisplay> {
+class StatDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
       child: Center(
         child: FutureBuilder(
-          future: ApiServices.getNews(),
+          future: ApiServices.getStatistiques(),
           builder: (BuildContext context, AsyncSnapshot snapshot){
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
@@ -30,17 +26,17 @@ class _ActuDisplayState extends State<ActuDisplay> {
                   );
                 }
                 if (snapshot.hasData) {
-                  final List<News> newslist = snapshot.data;
-                  if (newslist.isEmpty) {
+                  final List<Statistique> statslist = snapshot.data;
+                  if (statslist.isEmpty) {
                     return Center(
-                      child: Text("Il n'y a aucune news pour le moment\nrevenez plus tard !"),
+                      child: Text("Il n'y a aucune qtatistique pour le moment\nrevenez plus tard !"),
                     );
                   }
                   return ListView.builder(
-                    itemCount: newslist.length,
+                    itemCount: statslist.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return NewsItem(
-                        news: newslist[index],
+                      return StatItem(
+                        statistique: statslist[index],
                       );
                     },
                   );

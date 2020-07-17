@@ -1,4 +1,8 @@
+import 'package:beneventflutter/page/Login.dart';
+import 'package:beneventflutter/webservices/ApiServices.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:beneventflutter/global.dart' as global;
 
 class BugForm extends StatefulWidget {
 
@@ -7,17 +11,20 @@ class BugForm extends StatefulWidget {
 }
 
 class _BugFormState extends State<BugForm> {
-  final objectbug = TextEditingController();
+  final titlebug = TextEditingController();
   final contentbug = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    objectbug.dispose();
+    titlebug.dispose();
     contentbug.dispose();
     super.dispose();
   }
 
+  void _goTo(BuildContext context, String name, {dynamic argument}) {
+    Navigator.of(context).pushNamed(name, arguments: argument);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,7 @@ class _BugFormState extends State<BugForm> {
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
-              controller: objectbug,
+              controller: titlebug,
               maxLength: 50,
               maxLines: 1,
               decoration: InputDecoration.collapsed(
@@ -55,16 +62,21 @@ class _BugFormState extends State<BugForm> {
               borderRadius: BorderRadius.circular(18.0),
               side: BorderSide(color: Colors.blue)),
           onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  // Retrieve the text the that user has entered by using the
-                  // TextEditingController.
-                  content: Text("object : ${objectbug.text}\ncontent :${contentbug.text} "),
-                );
-              },
-            );
+            if (global.isLoggedIn) {
+            Future<String> message = ApiServices.sendBug(titlebug.text, contentbug.text, new DateFormat('yyyy-MM-dd  HH:mm:ss').format(DateTime.now()));
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    // Retrieve the text the that user has entered by using the
+                    // TextEditingController.
+                    content: Text("content :$message"),
+                  );
+                },
+              );
+            } else {
+              _goTo(context, Login.routeName);
+            }
           },
           color: Colors.blue,
           textColor: Colors.white,

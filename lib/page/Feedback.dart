@@ -2,6 +2,7 @@ import 'package:beneventflutter/widget/BugForm.dart';
 import 'package:beneventflutter/widget/BurgerMenu.dart';
 import 'package:beneventflutter/widget/ImpForm.dart';
 import 'package:flutter/material.dart';
+import 'package:beneventflutter/global.dart' as global;
 
 class FeedBack extends StatefulWidget {
   static const routeName = "Feedback";
@@ -18,6 +19,23 @@ class _FeedBackState extends State<FeedBack> {
     return Scaffold(
       appBar: AppBar(
         title: Text('FeedBack'),
+        actions: <Widget>[
+          Center(
+            child: global.isLoggedIn
+                ? Text(
+              "${global.name}",
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            )
+                : Text(
+              "Vous n'etes pas encore connecté",
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+          )
+        ],
       ),
       body: Container(
         child: ListView(

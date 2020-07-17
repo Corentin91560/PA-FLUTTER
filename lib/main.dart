@@ -1,3 +1,4 @@
+import 'package:beneventflutter/page/Login.dart';
 import 'package:flutter/material.dart';
 
 import 'page/Contact.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         Home.routeName: (BuildContext context) => Home(),
         Contact.routeName: (BuildContext context) => Contact(),
         FeedBack.routeName:(BuildContext context)=> FeedBack(),
+        Login.routeName:(BuildContext context)=> Login(),
         /*},
       onGenerateRoute: (RouteSettings settings) {
         final dynamic arguments = settings.arguments;

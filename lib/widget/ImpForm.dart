@@ -1,7 +1,9 @@
+import 'package:beneventflutter/page/Login.dart';
 import 'package:beneventflutter/webservices/ApiServices.dart';
 import 'package:beneventflutter/widget/StarDisplay.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:beneventflutter/global.dart' as global;
 
 class ImpForm extends StatefulWidget {
   @override
@@ -13,6 +15,10 @@ class _ImpFormState extends State<ImpForm> {
 
   final objectimp = TextEditingController();
   final contentimp = TextEditingController();
+
+  void _goTo(BuildContext context, String name, {dynamic argument}) {
+    Navigator.of(context).pushNamed(name, arguments: argument);
+  }
 
   @override
   void dispose() {
@@ -59,18 +65,25 @@ class _ImpFormState extends State<ImpForm> {
               borderRadius: BorderRadius.circular(18.0),
               side: BorderSide(color: Colors.blue)),
           onPressed: () {
-              Future<String> message = ApiServices.sendRating(contentimp.text, rating, new DateFormat('yyyy-MM-dd  HH:mm:ss').format(DateTime.now()));
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  // Retrieve the text the that user has entered by using the
-                  // TextEditingController.
-                  content: Text(
-                      "content :$message"),
-                );
-              },
-            );
+            if (global.isLoggedIn) {
+              Future<String> message = ApiServices.sendRating(
+                  contentimp.text,
+                  rating,
+                  new DateFormat('yyyy-MM-dd  HH:mm:ss')
+                      .format(DateTime.now()));
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    // Retrieve the text the that user has entered by using the
+                    // TextEditingController.
+                    content: Text("content :$message"),
+                  );
+                },
+              );
+            } else {
+              _goTo(context, Login.routeName);
+            }
           },
           color: Colors.blue,
           textColor: Colors.white,
