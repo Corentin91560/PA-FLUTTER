@@ -64,9 +64,9 @@ class _ImpFormState extends State<ImpForm> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
               side: BorderSide(color: Colors.blue)),
-          onPressed: () {
+          onPressed: () async {
             if (global.isLoggedIn) {
-              Future<String> message = ApiServices.sendRating(
+               await ApiServices.sendRating(
                   contentimp.text,
                   rating,
                   new DateFormat('yyyy-MM-dd  HH:mm:ss')
@@ -77,7 +77,7 @@ class _ImpFormState extends State<ImpForm> {
                   return AlertDialog(
                     // Retrieve the text the that user has entered by using the
                     // TextEditingController.
-                    content: Text("content :$message"),
+                    content: Text("Merci de votre retour"),
                   );
                 },
               );

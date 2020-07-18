@@ -51,6 +51,17 @@ class Login extends StatelessWidget {
                 await ApiServices.LoginAsso(email.text, password.text);
                 if (global.isLoggedIn) {
                   _goTo(context, FeedBack.routeName);
+                }else{
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        // Retrieve the text the that user has entered by using the
+                        // TextEditingController.
+                        content: Text("Veuillez verifier vos identifiants"),
+                      );
+                    },
+                  );
                 }
               }
             },

@@ -10,10 +10,8 @@ import 'package:beneventflutter/global.dart' as global;
 import 'package:crypto/crypto.dart';
 
 class ApiServices {
-  static String _url = "http://localhost:3000/";
-  //static String _url = "https://benevent-esgi.herokuapp.com/";
-
-
+  //static String _url = "http://localhost:3000/";
+  static String _url = "https://benevent-esgi.herokuapp.com/";
 
   static Future<List<News>> getNews() async {
     final response = await http.get(_url + "news");
@@ -28,41 +26,36 @@ class ApiServices {
     return newslist;
   }
 
-  static Future<String> sendBug(
-      String title, String content, String date) async {
-    String message = "";
+  static sendBug(String title, String content, String date) async {
     String url = _url + "feedback/bug";
     Map<String, String> headers = {"Content-type": "application/json"};
     content = content.replaceAll('"', '\'\'');
     String json;
-    if(global.isUser){
+    if (global.isUser) {
       json =
           '{"title": "$title", "content": "$content", "date": "$date", "platform": "FLUTTER", "idtype": 1,"iduser": ${global.id}}'; // make POST request
-    }else{
+    } else {
       json =
           '{"title": "$title", "content": "$content", "date": "$date", "platform": "FLUTTER", "idtype": 1,"idassociation": ${global.id}}'; // make POST request
     }
     Response response = await http.post(url, headers: headers, body: json);
     int statusCode = response.statusCode;
     if (statusCode == 200) {
-      message = "Votre retour a bien été pris en compte";
+      global.resultimp = true;
     } else {
-      message = "Une erreur est survenue \nCode d'erreur $statusCode";
+      global.resultimp = false;
     }
-    return message;
   }
 
-  static Future<String> sendRating(
-      String content, int note, String date) async {
-    String message = "";
+  static sendRating(String content, int note, String date) async {
     String url = _url + "feedback/rating";
     Map<String, String> headers = {"Content-type": "application/json"};
     content = content.replaceAll('"', '\'\'');
     String json;
-    if(global.isUser){
+    if (global.isUser) {
       json =
           '{"content": "$content", "note": $note, "date": "$date", "platform": "FLUTTER", "idtype": 2, "iduser": ${global.id}}';
-    }else{
+    } else {
       json =
           '{"content": "$content", "note": $note, "date": "$date", "platform": "FLUTTER", "idtype": 2, "idassociation": ${global.id}}';
     }
@@ -70,11 +63,10 @@ class ApiServices {
     Response response = await http.post(url, headers: headers, body: json);
     int statusCode = response.statusCode;
     if (statusCode == 200) {
-      message = "Votre retour a bien été pris en compte";
+      global.resultimp = true;
     } else {
-      message = "Une erreur est survenue \nCode d'erreur $statusCode";
+      global.resultimp = false;
     }
-    return message;
   }
 
   static Future<List<Statistique>> getStatistiques() async {
@@ -113,7 +105,7 @@ class ApiServices {
     }
   }
 
-  static LoginAsso(String email,String password) async {
+  static LoginAsso(String email, String password) async {
     String url = _url + "signin/association";
     Map<String, String> headers = {"Content-type": "application/json"};
     var cryptpass = generateMd5(password);
@@ -126,8 +118,9 @@ class ApiServices {
     if (statusCode == 200) {
       final jsonBody = json.decode(response.body);
       final List<Association> connectedasso = [];
-      connectedasso.addAll(
-          (jsonBody as List).map((asso) => Association.fromJson(asso)).toList());
+      connectedasso.addAll((jsonBody as List)
+          .map((asso) => Association.fromJson(asso))
+          .toList());
       global.isLoggedIn = true;
       global.name = connectedasso[0].name;
       global.id = connectedasso[0].id;
