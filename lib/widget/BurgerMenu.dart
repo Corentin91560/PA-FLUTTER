@@ -1,11 +1,12 @@
 import 'package:beneventflutter/page/Contact.dart';
 import 'package:beneventflutter/page/Feedback.dart';
 import 'package:beneventflutter/page/Home.dart';
+import 'package:beneventflutter/page/Login.dart';
 import 'package:beneventflutter/page/Stat.dart';
 import 'package:flutter/material.dart';
+import 'package:beneventflutter/global.dart' as global;
 
 class BurgerMenu extends StatelessWidget {
-
   void _goTo(BuildContext context, String name, {dynamic argument}) {
     Navigator.of(context).pushNamed(name, arguments: argument);
   }
@@ -58,7 +59,26 @@ class BurgerMenu extends StatelessWidget {
               Navigator.pop(context);
               _goTo(context, FeedBack.routeName);
             },
-          )
+          ),
+          global.isLoggedIn
+              ? ListTile(
+                  title: Text('Se Déconnecter'),
+                  onTap: () {
+                    global.isLoggedIn = false;
+                    global.isUser = false;
+                    global.name = "";
+                    global.id = 0;
+                    Navigator.pop(context);
+                    _goTo(context, Home.routeName);
+                  },
+                )
+              : ListTile(
+                  title: Text('Se connecter'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _goTo(context, Login.routeName);
+                  },
+                ),
         ],
       ),
     );
