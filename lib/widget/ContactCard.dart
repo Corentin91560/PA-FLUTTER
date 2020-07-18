@@ -15,13 +15,14 @@ class ContactCard extends StatefulWidget {
 class _ContactCardState extends State<ContactCard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Card(
-        child: InkWell(
-          splashColor: Colors.blue,
-          onTap: () {
-            print('Card tapped.');
-          },
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        child: Card(
+          color: Color(0xFFE1E1E1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
           child: Column(
             children: <Widget>[
               Expanded(
@@ -30,10 +31,23 @@ class _ContactCardState extends State<ContactCard> {
                   image: AssetImage(widget.pictureprofil),
                 ),
               ),
-              Spacer(flex: 1,),
-              Expanded(flex: 1,child: Text(widget.name)),
-              Expanded(flex: 1,child: Text(widget.githuburl)),
-              Expanded(flex: 1,child: Text(widget.phone)),
+              Spacer(),
+              Expanded(
+                  child: Text(
+                widget.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              )),
+              Expanded(
+                  child: Text(
+                widget.githuburl,
+              )),
+              Expanded(
+                  child: Text(
+                widget.phone,
+              )),
             ],
           ),
         ),

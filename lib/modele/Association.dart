@@ -10,5 +10,4 @@ class Association{
       json["name"],
     );
   }
-
 }

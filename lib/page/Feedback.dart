@@ -18,21 +18,42 @@ class _FeedBackState extends State<FeedBack> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('FeedBack'),
+        backgroundColor: Color(0xff63c173),
+        title: Row(
+          children: [
+            Text(
+              'Feedback ',
+            ),
+            Container(
+              child: Image(
+                height: MediaQuery.of(context).size.height / 20 ,
+                alignment: Alignment.center,
+                image: AssetImage(
+                    'lib/ressources/logo_benevent.png'),
+              ),
+            ),
+          ],
+        ),
         actions: <Widget>[
           Center(
             child: global.isLoggedIn
-                ? Text(
-              "${global.name}",
-              style: TextStyle(
-                fontSize: 16,
+                ? Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                "${global.name}",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
             )
-                : Text(
-              "Vous n'etes pas encore connecté",
-              style: TextStyle(
-                fontSize: 16,
+                : Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                "Vous n'êtes pas encore connecté",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 16,
+                ),
               ),
             ),
           )
@@ -50,24 +71,15 @@ class _FeedBackState extends State<FeedBack> {
                   flex: 8,
                   child: Column(
                     children: <Widget>[
-                      Row(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  side: BorderSide(color: Colors.green)),
-                              onPressed: () {
-                                setState(() {
-                                  status = "bug";
-                                });
-                              },
-                              color: Colors.green,
-                              textColor: Colors.white,
-                              child: Text("Déclarer un Bug".toUpperCase(),
-                                  style: TextStyle(fontSize: 14)),
+                          Container(
+                            width: 300,
+                            height: 300,
+                            child: Image(
+                              image: AssetImage(
+                                  'lib/ressources/logo_benevent.png'),
                             ),
                           ),
                           Padding(
@@ -75,18 +87,41 @@ class _FeedBackState extends State<FeedBack> {
                             child: RaisedButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18.0),
-                                  side: BorderSide(color: Colors.green)),
+                                  side: BorderSide(color: Colors.black)),
+                              onPressed: () {
+                                setState(() {
+                                  status = "bug";
+                                });
+                              },
+                              color: Color(0xffec9595),
+                              textColor: Colors.white,
+                              child: Text("Déclarer un Bug".toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                  )),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: BorderSide(color: Colors.black)),
                               onPressed: () {
                                 setState(() {
                                   status = "imp";
                                 });
                               },
-                              color: Colors.green,
+                              color: Color(0xffece495),
                               textColor: Colors.white,
                               child: Text("Nous Noter".toUpperCase(),
-                                  style: TextStyle(fontSize: 14)),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                  )),
                             ),
-                          )
+                          ),
                         ],
                       ),
                       if (status == "imp") ImpForm(),

@@ -33,22 +33,9 @@ class _ImpFormState extends State<ImpForm> {
     return Column(
       children: <Widget>[
         Text('Nous Noter'),
-        Card(
-          color: Color(0xFFC9C9CF),
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextField(
-              controller: contentimp,
-              maxLength: 255,
-              maxLines: 8,
-              decoration: InputDecoration.collapsed(
-                  hintText: "Contenu de votre commentaire"),
-            ),
-          ),
-        ),
         IconTheme(
           data: IconThemeData(
-            color: Colors.green,
+            color: Color(0xffffe800),
             size: 48,
           ),
           child: StarRating(
@@ -60,10 +47,23 @@ class _ImpFormState extends State<ImpForm> {
             value: rating,
           ),
         ),
+        Card(
+          color: Color(0xFFE2E2E2),
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextField(
+              controller: contentimp,
+              maxLength: 255,
+              maxLines: 8,
+              decoration: InputDecoration.collapsed(
+                  hintText: "Contenu de votre commentaire"),
+            ),
+          ),
+        ),
         RaisedButton(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18.0),
-            side: BorderSide(color: Colors.green),
+            side: BorderSide(color: Colors.black),
           ),
           onPressed: () async {
             if (global.isLoggedIn) {
@@ -86,8 +86,8 @@ class _ImpFormState extends State<ImpForm> {
               _goTo(context, Login.routeName);
             }
           },
-          color: Colors.green,
-          textColor: Colors.white,
+          color: Color(0xffece495),
+          textColor: Colors.black,
           child: Column(
             children: <Widget>[
               Text("Send".toUpperCase(), style: TextStyle(fontSize: 14)),

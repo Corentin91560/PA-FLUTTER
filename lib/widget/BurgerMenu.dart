@@ -19,42 +19,45 @@ class BurgerMenu extends StatelessWidget {
           DrawerHeader(
             child: Row(
               children: <Widget>[
+                Text(
+                  'BENEVENT',
+                  style: TextStyle(fontSize: 20),
+                ),
                 Expanded(
                   flex: 2,
                   child: Image(
                     image: AssetImage('lib/ressources/logo_benevent.png'),
                   ),
                 ),
-                Text('Benevent'),
               ],
             ),
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: Color(0xff6fd680),
             ),
           ),
           ListTile(
-            title: Text('Accueil'),
+            title: Text('ACCUEIL'),
             onTap: () {
               Navigator.pop(context);
               _goTo(context, Home.routeName);
             },
           ),
           ListTile(
-            title: Text('Statistiques'),
+            title: Text('STATISTIQUES'),
             onTap: () {
               Navigator.pop(context);
               _goTo(context, Stat.routeName);
             },
           ),
           ListTile(
-            title: Text('Contact'),
+            title: Text('CONTACT'),
             onTap: () {
               Navigator.pop(context);
               _goTo(context, Contact.routeName);
             },
           ),
           ListTile(
-            title: Text('FeedBack'),
+            title: Text('FEEDBACK'),
             onTap: () {
               Navigator.pop(context);
               _goTo(context, FeedBack.routeName);
@@ -62,7 +65,7 @@ class BurgerMenu extends StatelessWidget {
           ),
           global.isLoggedIn
               ? ListTile(
-                  title: Text('Se Déconnecter'),
+                  title: Text('SE DECONNECTER'),
                   onTap: () {
                     global.isLoggedIn = false;
                     global.isUser = false;
@@ -73,7 +76,7 @@ class BurgerMenu extends StatelessWidget {
                   },
                 )
               : ListTile(
-                  title: Text('Se connecter'),
+                  title: Text('SE CONNECTER'),
                   onTap: () {
                     Navigator.pop(context);
                     _goTo(context, Login.routeName);

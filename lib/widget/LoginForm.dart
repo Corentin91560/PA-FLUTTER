@@ -26,21 +26,20 @@ class _LoginFormState extends State<LoginForm> {
         Spacer(),
         Image(
           image: AssetImage('lib/ressources/logo_benevent.png'),
-          width: MediaQuery.of(context).size.width/3,
-          height: MediaQuery.of(context).size.height/3,
+          width: MediaQuery.of(context).size.width / 4,
+          height: MediaQuery.of(context).size.height / 4,
         ),
-        Spacer(),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(50),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.7,
+            width: MediaQuery.of(context).size.width / 2,
             child: TextField(
               controller: email,
               maxLines: 1,
               decoration: new InputDecoration(
                   border: new OutlineInputBorder(
                     borderRadius: const BorderRadius.all(
-                      const Radius.circular(10.0),
+                      const Radius.circular(30),
                     ),
                   ),
                   filled: true,
@@ -52,28 +51,31 @@ class _LoginFormState extends State<LoginForm> {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-          child: Container(
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: TextField(
-              controller: password,
-              maxLines: 1,
-              decoration: new InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(10.0),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+            child: Container(
+              width: MediaQuery.of(context).size.width / 2,
+              child: TextField(
+                controller: password,
+                maxLines: 1,
+                decoration: new InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(30),
+                      ),
                     ),
-                  ),
-                  filled: true,
-                  hintStyle: new TextStyle(color: Colors.grey[800]),
-                  hintText: "Mot de passe",
-                  fillColor: Colors.white70),
+                    filled: true,
+                    hintStyle: new TextStyle(color: Colors.grey[800]),
+                    hintText: "Mot de passe",
+                    fillColor: Colors.white70),
+              ),
             ),
           ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0,0,0,10),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
             child: RaisedButton(
               onPressed: () async {
                 await ApiServices.LoginUser(email.text, password.text);
@@ -88,7 +90,13 @@ class _LoginFormState extends State<LoginForm> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          content: Text("Veuillez verifier vos identifiants"),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          content: Text(
+                            "Veuillez verifier vos identifiants",
+                            style: TextStyle(color: Colors.red),
+                          ),
                         );
                       },
                     );
@@ -97,9 +105,9 @@ class _LoginFormState extends State<LoginForm> {
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.0),
-                side: BorderSide(color: Colors.green),
+                side: BorderSide(color: Color(0xff6fd680)),
               ),
-              color: Colors.green,
+              color: Color(0xff6fd680),
               textColor: Colors.white,
               child: Text(
                 "Connexion",

@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:beneventflutter/global.dart' as global;
 
 class BugForm extends StatefulWidget {
-
   @override
   _BugFormState createState() => _BugFormState();
 }
@@ -30,40 +29,46 @@ class _BugFormState extends State<BugForm> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('Reporter un bug'),
+        Text('Déclarer un bug'),
         Card(
-          color: Color(0xFFC9C9CF),
+          color: Color(0xFFE2E2E2),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
               controller: titlebug,
               maxLength: 50,
               maxLines: 1,
-              decoration: InputDecoration.collapsed(
-                  hintText: "Titre de votre rapport"),
+              decoration:
+                  InputDecoration.collapsed(hintText: "Titre de votre rapport"),
             ),
           ),
         ),
         Card(
-          color: Color(0xFFC9C9CF),
+          color: Color(0xFFE2E2E2),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
               controller: contentbug,
               maxLength: 255,
               maxLines: 8,
-              decoration: InputDecoration.collapsed(
-                  hintText: "contenue de votre rapport"),
+              decoration: InputDecoration.collapsed(hintText: "Commentaire"),
             ),
           ),
         ),
         RaisedButton(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-              side: BorderSide(color: Colors.green)),
+            borderRadius: BorderRadius.circular(18.0),
+            side: BorderSide(
+              color: Colors.black,
+            ),
+          ),
           onPressed: () {
             if (global.isLoggedIn) {
-            Future<String> message = ApiServices.sendBug(titlebug.text, contentbug.text, new DateFormat('yyyy-MM-dd  HH:mm:ss').format(DateTime.now()));
+              Future<String> message = ApiServices.sendBug(
+                  titlebug.text,
+                  contentbug.text,
+                  new DateFormat('yyyy-MM-dd  HH:mm:ss')
+                      .format(DateTime.now()));
               showDialog(
                 context: context,
                 builder: (context) {
@@ -78,12 +83,11 @@ class _BugFormState extends State<BugForm> {
               _goTo(context, Login.routeName);
             }
           },
-          color: Colors.green,
-          textColor: Colors.white,
+          color: Color(0xffec9595),
+          textColor: Colors.black,
           child: Column(
             children: <Widget>[
-              Text("Send".toUpperCase(),
-                  style: TextStyle(fontSize: 14)),
+              Text("Send".toUpperCase(), style: TextStyle(fontSize: 14)),
               Icon(Icons.send),
             ],
           ),

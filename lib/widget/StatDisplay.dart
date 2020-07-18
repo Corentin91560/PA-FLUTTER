@@ -8,11 +8,12 @@ class StatDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       margin: EdgeInsets.all(10),
       child: Center(
         child: FutureBuilder(
           future: ApiServices.getStatistiques(),
-          builder: (BuildContext context, AsyncSnapshot snapshot){
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
                 return Center(
@@ -29,7 +30,8 @@ class StatDisplay extends StatelessWidget {
                   final List<Statistique> statslist = snapshot.data;
                   if (statslist.isEmpty) {
                     return Center(
-                      child: Text("Il n'y a aucune qtatistique pour le moment\nrevenez plus tard !"),
+                      child: Text("Il n'y a aucune statistique pour le moment\n"
+                          "Revenez plus tard !"),
                     );
                   }
                   return ListView.builder(
@@ -42,7 +44,7 @@ class StatDisplay extends StatelessWidget {
                   );
                 } else {
                   return Center(
-                    child: Text("Aucune donnée n'a été récupéré"),
+                    child: Text("Aucune donnée n'a été récupérée"),
                   );
                 }
                 break;

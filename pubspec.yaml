@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   http: 0.12.0+4
   intl: ^0.16.1
+  crypt: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -42,6 +43,10 @@ dev_dependencies:
 flutter:
   assets:
     - lib/ressources/
+  fonts:
+    - family: Monofonto
+      fonts:
+        - asset: lib/ressources/monofonto.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

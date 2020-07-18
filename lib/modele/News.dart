@@ -1,7 +1,7 @@
 class News {
   final String title;
   final String content;
-  final String date;
+  final DateTime date;
 
   News(this.title, this.content, this.date);
 
@@ -9,7 +9,7 @@ class News {
     return News(
       json["title"],
       json["content"],
-      json["date"],
+      DateTime.parse(json["date"]),
     );
   }
 }

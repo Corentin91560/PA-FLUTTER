@@ -23,17 +23,17 @@ class StatItem extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  StatDetail("Nombre d'événement à venir ", statistique.numbereventnotstarted.toString()),
-                  StatDetail("Moyenne d'événement par association ", statistique.averageeventperasso.toStringAsFixed(1)),
-                  StatDetail("Moyenne de post par événement ", statistique.averagepostbyevent.toStringAsFixed(1)),
-                  StatDetail("Nombre d'événement en cours ", statistique.numbereventinprogress.toString()),
+                  StatDetail(" Nombre d'événements à venir", statistique.numbereventnotstarted.toString()),
+                  StatDetail(" Nombre moyen d'événements par association", statistique.averageeventperasso.toStringAsFixed(1)),
+                  StatDetail(" Moyenne de posts par événement", statistique.averagepostbyevent.toStringAsFixed(1)),
+                  StatDetail(" Nombre d'événements en cours", statistique.numbereventinprogress.toString()),
                 ],
               ),
               Row(
                 children: <Widget>[
-                  StatDetail("Nombre D'utilisateur",statistique.numberuser.toString()),
-                  StatDetail("Nombre D'association",statistique.numberassociation.toString()),
-                  StatDetail("Nombre d'événement fini ", statistique.numbereventended.toString()),
+                  StatDetail(" Nombre d'utilisateurs",statistique.numberuser.toString()),
+                  StatDetail(" Nombre d'associations",statistique.numberassociation.toString()),
+                  StatDetail(" Nombre d'événements finis", statistique.numbereventended.toString()),
                 ],
               ),
             ],

@@ -33,7 +33,7 @@ class _ActuDisplayState extends State<ActuDisplay> {
                   final List<News> newslist = snapshot.data;
                   if (newslist.isEmpty) {
                     return Center(
-                      child: Text("Il n'y a aucune news pour le moment\nrevenez plus tard !"),
+                      child: Text("Il n'y a aucune news pour le moment\nRevenez plus tard !"),
                     );
                   }
                   return ListView.builder(

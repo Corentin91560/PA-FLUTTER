@@ -2,6 +2,7 @@ import 'package:beneventflutter/page/DetailNews.dart';
 import 'package:beneventflutter/page/Login.dart';
 import 'package:flutter/material.dart';
 
+import 'modele/News.dart';
 import 'page/Contact.dart';
 import 'page/Home.dart';
 import 'page/Screen404.dart';
@@ -16,25 +17,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Benevent',
+      theme: ThemeData(fontFamily: 'Monofonto'),
       routes: {
         "/": (BuildContext context) => Home(),
         Stat.routeName: (BuildContext context) => Stat(),
         Home.routeName: (BuildContext context) => Home(),
         Contact.routeName: (BuildContext context) => Contact(),
-        FeedBack.routeName:(BuildContext context)=> FeedBack(),
-        Login.routeName:(BuildContext context)=> Login(),
+        FeedBack.routeName:(BuildContext context) => FeedBack(),
+        Login.routeName:(BuildContext context) => Login(),
         },
       onGenerateRoute: (RouteSettings settings) {
         final dynamic arguments = settings.arguments;
         switch (settings.name) {
           case DetailNews.routeName:
-            String content;
-            if (arguments is String) {
-              content = arguments;
+            News news;
+            if (arguments is News) {
+              news = arguments;
             }
             return MaterialPageRoute(
               builder: (BuildContext context) => DetailNews(
-                content: content,
+                news: news,
               ),
             );
             break;
