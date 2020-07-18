@@ -32,9 +32,9 @@ class _ImpFormState extends State<ImpForm> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('Send an improvement'),
+        Text('Nous Noter'),
         Card(
-          color: Colors.grey,
+          color: Color(0xFFC9C9CF),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
@@ -42,13 +42,13 @@ class _ImpFormState extends State<ImpForm> {
               maxLength: 255,
               maxLines: 8,
               decoration: InputDecoration.collapsed(
-                  hintText: "Content of your improvement"),
+                  hintText: "Contenu de votre commentaire"),
             ),
           ),
         ),
         IconTheme(
           data: IconThemeData(
-            color: Colors.blue,
+            color: Colors.green,
             size: 48,
           ),
           child: StarRating(
@@ -62,11 +62,12 @@ class _ImpFormState extends State<ImpForm> {
         ),
         RaisedButton(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-              side: BorderSide(color: Colors.blue)),
+            borderRadius: BorderRadius.circular(18.0),
+            side: BorderSide(color: Colors.green),
+          ),
           onPressed: () async {
             if (global.isLoggedIn) {
-               await ApiServices.sendRating(
+              await ApiServices.sendRating(
                   contentimp.text,
                   rating,
                   new DateFormat('yyyy-MM-dd  HH:mm:ss')
@@ -85,7 +86,7 @@ class _ImpFormState extends State<ImpForm> {
               _goTo(context, Login.routeName);
             }
           },
-          color: Colors.blue,
+          color: Colors.green,
           textColor: Colors.white,
           child: Column(
             children: <Widget>[

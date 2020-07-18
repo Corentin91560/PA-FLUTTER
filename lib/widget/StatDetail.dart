@@ -40,16 +40,26 @@ class _StatDetailState extends State<StatDetail> with SingleTickerProviderStateM
       height: 300,
       width: 300,
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          side: BorderSide(
+            color: Colors.green,
+            width: 2.0,
+          )
+        ),
         child: Column(
           children: <Widget>[
             Center(
-                child: Text(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0,5,0,0),
+                  child: Text(
               "${widget.text}",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 24,
+                  fontSize: 25,
               ),
-            )),
+            ),
+                )),
             Spacer(
               flex: 1,
             ),

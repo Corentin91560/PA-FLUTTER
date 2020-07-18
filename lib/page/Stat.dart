@@ -15,7 +15,8 @@ class _StatState extends State<Stat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Statistics'),
+        backgroundColor: Colors.green,
+        title: Text('Statistiques'),
         actions: <Widget>[
           Center(
             child: global.isLoggedIn

@@ -30,9 +30,9 @@ class _BugFormState extends State<BugForm> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('Report Bug'),
+        Text('Reporter un bug'),
         Card(
-          color: Colors.grey,
+          color: Color(0xFFC9C9CF),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
@@ -40,12 +40,12 @@ class _BugFormState extends State<BugForm> {
               maxLength: 50,
               maxLines: 1,
               decoration: InputDecoration.collapsed(
-                  hintText: "Object of your report"),
+                  hintText: "Titre de votre rapport"),
             ),
           ),
         ),
         Card(
-          color: Colors.grey,
+          color: Color(0xFFC9C9CF),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
@@ -53,14 +53,14 @@ class _BugFormState extends State<BugForm> {
               maxLength: 255,
               maxLines: 8,
               decoration: InputDecoration.collapsed(
-                  hintText: "Content of your report"),
+                  hintText: "contenue de votre rapport"),
             ),
           ),
         ),
         RaisedButton(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
-              side: BorderSide(color: Colors.blue)),
+              side: BorderSide(color: Colors.green)),
           onPressed: () {
             if (global.isLoggedIn) {
             Future<String> message = ApiServices.sendBug(titlebug.text, contentbug.text, new DateFormat('yyyy-MM-dd  HH:mm:ss').format(DateTime.now()));
@@ -78,7 +78,7 @@ class _BugFormState extends State<BugForm> {
               _goTo(context, Login.routeName);
             }
           },
-          color: Colors.blue,
+          color: Colors.green,
           textColor: Colors.white,
           child: Column(
             children: <Widget>[

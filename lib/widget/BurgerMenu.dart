@@ -29,18 +29,18 @@ class BurgerMenu extends StatelessWidget {
               ],
             ),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.green,
             ),
           ),
           ListTile(
-            title: Text('Home'),
+            title: Text('Accueil'),
             onTap: () {
               Navigator.pop(context);
               _goTo(context, Home.routeName);
             },
           ),
           ListTile(
-            title: Text('Statistics'),
+            title: Text('Statistiques'),
             onTap: () {
               Navigator.pop(context);
               _goTo(context, Stat.routeName);

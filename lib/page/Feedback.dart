@@ -18,6 +18,7 @@ class _FeedBackState extends State<FeedBack> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text('FeedBack'),
         actions: <Widget>[
           Center(
@@ -57,15 +58,15 @@ class _FeedBackState extends State<FeedBack> {
                             child: RaisedButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18.0),
-                                  side: BorderSide(color: Colors.blue)),
+                                  side: BorderSide(color: Colors.green)),
                               onPressed: () {
                                 setState(() {
                                   status = "bug";
                                 });
                               },
-                              color: Colors.blue,
+                              color: Colors.green,
                               textColor: Colors.white,
-                              child: Text("Report a Bug".toUpperCase(),
+                              child: Text("Déclarer un Bug".toUpperCase(),
                                   style: TextStyle(fontSize: 14)),
                             ),
                           ),
@@ -74,15 +75,15 @@ class _FeedBackState extends State<FeedBack> {
                             child: RaisedButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18.0),
-                                  side: BorderSide(color: Colors.blue)),
+                                  side: BorderSide(color: Colors.green)),
                               onPressed: () {
                                 setState(() {
                                   status = "imp";
                                 });
                               },
-                              color: Colors.blue,
+                              color: Colors.green,
                               textColor: Colors.white,
-                              child: Text("Leave a Improvement".toUpperCase(),
+                              child: Text("Nous Noter".toUpperCase(),
                                   style: TextStyle(fontSize: 14)),
                             ),
                           )
