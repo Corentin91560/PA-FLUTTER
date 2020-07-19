@@ -47,6 +47,7 @@ class _LoginFormState extends State<LoginForm> {
             child: Container(
               width: MediaQuery.of(context).size.width / 2,
               child: TextField(
+                obscureText: true,
                 controller: password,
                 maxLines: 1,
                 decoration: new InputDecoration(
