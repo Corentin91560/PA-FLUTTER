@@ -16,9 +16,11 @@ class Contact extends StatelessWidget {
           children: <Widget>[
             ContactCard("Thomas MARTIN", "www.github.com/SoKaii",
                 "lib/assets/logo_benevent.png", "0666666666"),
-            ContactCard("Matthieu HABIB", "www.github.com",
+            ContactCard("Matthieu HABIB", "www.github.com/HabibM7593",
                 "lib/assets/logo_benevent.png", "0666666666"),
-            ContactCard("Corentin DELAGE", "www.github.com",
+            ContactCard("Sandrine PATIN", "www.github.com/SandrinePatin",
+                "lib/assets/logo_benevent.png", "0666666666"),
+            ContactCard("Corentin DELAGE", "www.github.com/Corentin91560",
                 "lib/assets/logo_benevent.png", "0666666666"),
           ],
         ),
