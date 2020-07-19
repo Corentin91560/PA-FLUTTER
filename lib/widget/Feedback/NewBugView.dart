@@ -1,50 +1,46 @@
 import 'package:beneventflutter/page/Login.dart';
-import 'package:beneventflutter/webservices/ApiServices.dart';
-import 'package:beneventflutter/widget/StarDisplay.dart';
+import 'file:///C:/Users/tmart/Desktop/Benevent/Flutter/PA-FLUTTER/lib/ApiServices.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:beneventflutter/global.dart' as global;
+import 'package:beneventflutter/state.dart' as state;
 
-class ImpForm extends StatefulWidget {
+class NewBugView extends StatefulWidget {
   @override
-  _ImpFormState createState() => _ImpFormState();
+  _NewBugViewState createState() => _NewBugViewState();
 }
 
-class _ImpFormState extends State<ImpForm> {
-  int rating = 0;
+class _NewBugViewState extends State<NewBugView> {
+  final titlebug = TextEditingController();
+  final contentbug = TextEditingController();
 
-  final objectimp = TextEditingController();
-  final contentimp = TextEditingController();
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    titlebug.dispose();
+    contentbug.dispose();
+    super.dispose();
+  }
 
   void _goTo(BuildContext context, String name, {dynamic argument}) {
     Navigator.of(context).pushNamed(name, arguments: argument);
   }
 
   @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    objectimp.dispose();
-    contentimp.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('Nous Noter'),
-        IconTheme(
-          data: IconThemeData(
-            color: Color(0xffffe800),
-            size: 48,
-          ),
-          child: StarRating(
-            onChanged: (index) {
-              setState(() {
-                rating = index;
-              });
-            },
-            value: rating,
+        Text('Déclarer un bug'),
+        Card(
+          color: Color(0xFFE2E2E2),
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextField(
+              controller: titlebug,
+              maxLength: 50,
+              maxLines: 1,
+              decoration:
+                  InputDecoration.collapsed(hintText: "Titre de votre rapport"),
+            ),
           ),
         ),
         Card(
@@ -52,24 +48,25 @@ class _ImpFormState extends State<ImpForm> {
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
-              controller: contentimp,
+              controller: contentbug,
               maxLength: 255,
               maxLines: 8,
-              decoration: InputDecoration.collapsed(
-                  hintText: "Contenu de votre commentaire"),
+              decoration: InputDecoration.collapsed(hintText: "Commentaire"),
             ),
           ),
         ),
         RaisedButton(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18.0),
-            side: BorderSide(color: Colors.black),
+            side: BorderSide(
+              color: Colors.black,
+            ),
           ),
-          onPressed: () async {
-            if (global.isLoggedIn) {
-              await ApiServices.sendRating(
-                  contentimp.text,
-                  rating,
+          onPressed: () {
+            if (state.isLoggedIn) {
+              Future<String> message = ApiServices.sendBug(
+                  titlebug.text,
+                  contentbug.text,
                   new DateFormat('yyyy-MM-dd  HH:mm:ss')
                       .format(DateTime.now()));
               showDialog(
@@ -78,7 +75,7 @@ class _ImpFormState extends State<ImpForm> {
                   return AlertDialog(
                     // Retrieve the text the that user has entered by using the
                     // TextEditingController.
-                    content: Text("Merci de votre retour"),
+                    content: Text("content :$message"),
                   );
                 },
               );
@@ -86,7 +83,7 @@ class _ImpFormState extends State<ImpForm> {
               _goTo(context, Login.routeName);
             }
           },
-          color: Color(0xffece495),
+          color: Color(0xffec9595),
           textColor: Colors.black,
           child: Column(
             children: <Widget>[

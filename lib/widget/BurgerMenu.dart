@@ -4,7 +4,7 @@ import 'package:beneventflutter/page/Home.dart';
 import 'package:beneventflutter/page/Login.dart';
 import 'package:beneventflutter/page/Stat.dart';
 import 'package:flutter/material.dart';
-import 'package:beneventflutter/global.dart' as global;
+import 'package:beneventflutter/state.dart' as state;
 
 class BurgerMenu extends StatelessWidget {
   void _goTo(BuildContext context, String name, {dynamic argument}) {
@@ -26,7 +26,7 @@ class BurgerMenu extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Image(
-                    image: AssetImage('lib/ressources/logo_benevent.png'),
+                    image: AssetImage('lib/assets/logo_benevent.png'),
                   ),
                 ),
               ],
@@ -63,14 +63,14 @@ class BurgerMenu extends StatelessWidget {
               _goTo(context, FeedBack.routeName);
             },
           ),
-          global.isLoggedIn
+          state.isLoggedIn
               ? ListTile(
                   title: Text('SE DECONNECTER'),
                   onTap: () {
-                    global.isLoggedIn = false;
-                    global.isUser = false;
-                    global.name = "";
-                    global.id = 0;
+                    state.isLoggedIn = false;
+                    state.isUser = false;
+                    state.name = "";
+                    state.id = 0;
                     Navigator.pop(context);
                     _goTo(context, Home.routeName);
                   },

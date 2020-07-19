@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class StatDetail extends StatefulWidget {
+class StatItem extends StatefulWidget {
   String text;
   String value;
 
-  StatDetail(this.text, this.value);
+  StatItem(this.text, this.value);
 
   @override
-  _StatDetailState createState() => _StatDetailState();
+  _StatItemState createState() => _StatItemState();
 }
 
-class _StatDetailState extends State<StatDetail>
+class _StatItemState extends State<StatItem>
     with SingleTickerProviderStateMixin {
   Animation<double> animation;
   AnimationController _controller;

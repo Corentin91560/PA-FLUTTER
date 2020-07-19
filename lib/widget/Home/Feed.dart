@@ -1,14 +1,14 @@
-import 'package:beneventflutter/modele/News.dart';
-import 'package:beneventflutter/webservices/ApiServices.dart';
-import 'package:beneventflutter/widget/NewsItem.dart';
+import 'package:beneventflutter/models/News.dart';
+import 'package:beneventflutter/ApiServices.dart';
+import 'package:beneventflutter/widget/Home/NewsItem.dart';
 import 'package:flutter/material.dart';
 
-class ActuDisplay extends StatefulWidget {
+class Feed extends StatefulWidget {
   @override
-  _ActuDisplayState createState() => _ActuDisplayState();
+  _FeedState createState() => _FeedState();
 }
 
-class _ActuDisplayState extends State<ActuDisplay> {
+class _FeedState extends State<Feed> {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,10 +1,10 @@
-import 'package:beneventflutter/modele/Statistique.dart';
-import 'package:beneventflutter/webservices/ApiServices.dart';
+import 'package:beneventflutter/models/Statistique.dart';
+import 'package:beneventflutter/ApiServices.dart';
 import 'package:flutter/material.dart';
 
-import 'StatItem.dart';
+import 'StatsView.dart';
 
-class StatDisplay extends StatelessWidget {
+class StatsCaller extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +37,7 @@ class StatDisplay extends StatelessWidget {
                   return ListView.builder(
                     itemCount: statslist.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return StatItem(
+                      return StatsView(
                         statistique: statslist[index],
                       );
                     },

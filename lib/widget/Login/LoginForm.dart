@@ -1,7 +1,7 @@
-import 'package:beneventflutter/page/Feedback.dart';
-import 'package:beneventflutter/webservices/ApiServices.dart';
+import 'package:beneventflutter/page/Home.dart';
+import 'package:beneventflutter/ApiServices.dart';
 import 'package:flutter/material.dart';
-import 'package:beneventflutter/global.dart' as global;
+import 'package:beneventflutter/state.dart' as state;
 
 class LoginForm extends StatefulWidget {
   @override
@@ -16,19 +16,10 @@ class _LoginFormState extends State<LoginForm> {
     Navigator.of(context).pushNamed(name, arguments: argument);
   }
 
-  final objectimp = TextEditingController();
-  final contentimp = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        Spacer(),
-        Image(
-          image: AssetImage('lib/ressources/logo_benevent.png'),
-          width: MediaQuery.of(context).size.width / 4,
-          height: MediaQuery.of(context).size.height / 4,
-        ),
+      children: [
         Padding(
           padding: const EdgeInsets.all(50),
           child: Container(
@@ -79,12 +70,12 @@ class _LoginFormState extends State<LoginForm> {
             child: RaisedButton(
               onPressed: () async {
                 await ApiServices.LoginUser(email.text, password.text);
-                if (global.isLoggedIn) {
-                  _goTo(context, FeedBack.routeName);
+                if (state.isLoggedIn) {
+                  _goTo(context, Home.routeName);
                 } else {
                   await ApiServices.LoginAsso(email.text, password.text);
-                  if (global.isLoggedIn) {
-                    _goTo(context, FeedBack.routeName);
+                  if (state.isLoggedIn) {
+                    _goTo(context, Home.routeName);
                   } else {
                     showDialog(
                       context: context,
@@ -115,7 +106,6 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
         ),
-        Spacer(),
       ],
     );
   }

@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:beneventflutter/modele/Association.dart';
-import 'package:beneventflutter/modele/News.dart';
-import 'package:beneventflutter/modele/Statistique.dart';
-import 'package:beneventflutter/modele/User.dart';
+import 'package:beneventflutter/models/Association.dart';
+import 'package:beneventflutter/models/News.dart';
+import 'package:beneventflutter/models/Statistique.dart';
+import 'package:beneventflutter/models/User.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:beneventflutter/global.dart' as global;
+import 'package:beneventflutter/state.dart' as state;
 import 'package:crypto/crypto.dart';
 
 class ApiServices {
@@ -31,19 +31,19 @@ class ApiServices {
     Map<String, String> headers = {"Content-type": "application/json"};
     content = content.replaceAll('"', '\'\'');
     String json;
-    if (global.isUser) {
+    if (state.isUser) {
       json =
-          '{"title": "$title", "content": "$content", "date": "$date", "platform": "FLUTTER", "idtype": 1,"iduser": ${global.id}}'; // make POST request
+          '{"title": "$title", "content": "$content", "date": "$date", "platform": "FLUTTER", "idtype": 1,"iduser": ${state.id}}'; // make POST request
     } else {
       json =
-          '{"title": "$title", "content": "$content", "date": "$date", "platform": "FLUTTER", "idtype": 1,"idassociation": ${global.id}}'; // make POST request
+          '{"title": "$title", "content": "$content", "date": "$date", "platform": "FLUTTER", "idtype": 1,"idassociation": ${state.id}}'; // make POST request
     }
     Response response = await http.post(url, headers: headers, body: json);
     int statusCode = response.statusCode;
     if (statusCode == 200) {
-      global.resultimp = true;
+      state.ratingResult = true;
     } else {
-      global.resultimp = false;
+      state.ratingResult = false;
     }
   }
 
@@ -52,20 +52,20 @@ class ApiServices {
     Map<String, String> headers = {"Content-type": "application/json"};
     content = content.replaceAll('"', '\'\'');
     String json;
-    if (global.isUser) {
+    if (state.isUser) {
       json =
-          '{"content": "$content", "note": $note, "date": "$date", "platform": "FLUTTER", "idtype": 2, "iduser": ${global.id}}';
+          '{"content": "$content", "note": $note, "date": "$date", "platform": "FLUTTER", "idtype": 2, "iduser": ${state.id}}';
     } else {
       json =
-          '{"content": "$content", "note": $note, "date": "$date", "platform": "FLUTTER", "idtype": 2, "idassociation": ${global.id}}';
+          '{"content": "$content", "note": $note, "date": "$date", "platform": "FLUTTER", "idtype": 2, "idassociation": ${state.id}}';
     }
     // make POST request
     Response response = await http.post(url, headers: headers, body: json);
     int statusCode = response.statusCode;
     if (statusCode == 200) {
-      global.resultimp = true;
+      state.ratingResult = true;
     } else {
-      global.resultimp = false;
+      state.ratingResult = false;
     }
   }
 
@@ -97,11 +97,11 @@ class ApiServices {
       final List<User> connecteduser = [];
       connecteduser.addAll(
           (jsonBody as List).map((user) => User.fromJson(user)).toList());
-      global.isLoggedIn = true;
-      global.isUser = true;
-      global.name = connecteduser[0].name;
-      global.id = connecteduser[0].id;
-      print(global.name);
+      state.isLoggedIn = true;
+      state.isUser = true;
+      state.name = connecteduser[0].name;
+      state.id = connecteduser[0].id;
+      print(state.name);
     }
   }
 
@@ -121,10 +121,10 @@ class ApiServices {
       connectedasso.addAll((jsonBody as List)
           .map((asso) => Association.fromJson(asso))
           .toList());
-      global.isLoggedIn = true;
-      global.name = connectedasso[0].name;
-      global.id = connectedasso[0].id;
-      print(global.name);
+      state.isLoggedIn = true;
+      state.name = connectedasso[0].name;
+      state.id = connectedasso[0].id;
+      print(state.name);
     }
   }
 }

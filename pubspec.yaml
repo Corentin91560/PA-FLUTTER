@@ -42,11 +42,11 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - lib/ressources/
+    - lib/assets/
   fonts:
     - family: Monofonto
       fonts:
-        - asset: lib/ressources/monofonto.ttf
+        - asset: lib/assets/monofonto.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

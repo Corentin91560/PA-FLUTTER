@@ -1,46 +1,50 @@
 import 'package:beneventflutter/page/Login.dart';
-import 'package:beneventflutter/webservices/ApiServices.dart';
+import 'package:beneventflutter/ApiServices.dart';
+import 'package:beneventflutter/widget/Feedback/RatingStar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:beneventflutter/global.dart' as global;
+import 'package:beneventflutter/state.dart' as state;
 
-class BugForm extends StatefulWidget {
+class NewRatingView extends StatefulWidget {
   @override
-  _BugFormState createState() => _BugFormState();
+  _NewRatingViewState createState() => _NewRatingViewState();
 }
 
-class _BugFormState extends State<BugForm> {
-  final titlebug = TextEditingController();
-  final contentbug = TextEditingController();
+class _NewRatingViewState extends State<NewRatingView> {
+  int rating = 0;
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    titlebug.dispose();
-    contentbug.dispose();
-    super.dispose();
-  }
+  final objectimp = TextEditingController();
+  final contentimp = TextEditingController();
 
   void _goTo(BuildContext context, String name, {dynamic argument}) {
     Navigator.of(context).pushNamed(name, arguments: argument);
   }
 
   @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    objectimp.dispose();
+    contentimp.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('Déclarer un bug'),
-        Card(
-          color: Color(0xFFE2E2E2),
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextField(
-              controller: titlebug,
-              maxLength: 50,
-              maxLines: 1,
-              decoration:
-                  InputDecoration.collapsed(hintText: "Titre de votre rapport"),
-            ),
+        Text('Nous Noter'),
+        IconTheme(
+          data: IconThemeData(
+            color: Color(0xffffe800),
+            size: 48,
+          ),
+          child: StarRating(
+            onChanged: (index) {
+              setState(() {
+                rating = index;
+              });
+            },
+            value: rating,
           ),
         ),
         Card(
@@ -48,25 +52,24 @@ class _BugFormState extends State<BugForm> {
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: TextField(
-              controller: contentbug,
+              controller: contentimp,
               maxLength: 255,
               maxLines: 8,
-              decoration: InputDecoration.collapsed(hintText: "Commentaire"),
+              decoration: InputDecoration.collapsed(
+                  hintText: "Contenu de votre commentaire"),
             ),
           ),
         ),
         RaisedButton(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18.0),
-            side: BorderSide(
-              color: Colors.black,
-            ),
+            side: BorderSide(color: Colors.black),
           ),
-          onPressed: () {
-            if (global.isLoggedIn) {
-              Future<String> message = ApiServices.sendBug(
-                  titlebug.text,
-                  contentbug.text,
+          onPressed: () async {
+            if (state.isLoggedIn) {
+              await ApiServices.sendRating(
+                  contentimp.text,
+                  rating,
                   new DateFormat('yyyy-MM-dd  HH:mm:ss')
                       .format(DateTime.now()));
               showDialog(
@@ -75,7 +78,7 @@ class _BugFormState extends State<BugForm> {
                   return AlertDialog(
                     // Retrieve the text the that user has entered by using the
                     // TextEditingController.
-                    content: Text("content :$message"),
+                    content: Text("Merci de votre retour"),
                   );
                 },
               );
@@ -83,7 +86,7 @@ class _BugFormState extends State<BugForm> {
               _goTo(context, Login.routeName);
             }
           },
-          color: Color(0xffec9595),
+          color: Color(0xffece495),
           textColor: Colors.black,
           child: Column(
             children: <Widget>[

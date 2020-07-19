@@ -1,5 +1,6 @@
-import 'package:beneventflutter/modele/News.dart';
+import 'package:beneventflutter/models/News.dart';
 import 'package:beneventflutter/page/DetailNews.dart';
+import 'package:beneventflutter/state.dart' as state;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -44,7 +45,8 @@ class NewsItem extends StatelessWidget {
               color: Color(0xff6fd680),
               textColor: Colors.white,
               onPressed: () {
-                _goTo(context, DetailNews.routeName, argument: news);
+                state.selectedNews = news;
+                _goTo(context, DetailNews.routeName);
               },
               child: Text("Voir plus"),
             ),
