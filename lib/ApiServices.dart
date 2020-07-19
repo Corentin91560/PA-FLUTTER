@@ -88,10 +88,8 @@ class ApiServices {
     var cryptpass = generateMd5(password);
     String sendjson =
         '{"email": "$email", "password": "$cryptpass"}'; // make POST request
-    print(sendjson);
     Response response = await http.post(url, headers: headers, body: sendjson);
     int statusCode = response.statusCode;
-    print(statusCode);
     if (statusCode == 200) {
       final jsonBody = json.decode(response.body);
       final List<User> connecteduser = [];
@@ -101,7 +99,6 @@ class ApiServices {
       state.isUser = true;
       state.name = connecteduser[0].name;
       state.id = connecteduser[0].id;
-      print(state.name);
     }
   }
 
@@ -111,10 +108,8 @@ class ApiServices {
     var cryptpass = generateMd5(password);
     String sendjson =
         '{"email": "$email", "password": "$cryptpass"}'; // make POST request
-    print(sendjson);
     Response response = await http.post(url, headers: headers, body: sendjson);
     int statusCode = response.statusCode;
-    print(statusCode);
     if (statusCode == 200) {
       final jsonBody = json.decode(response.body);
       final List<Association> connectedasso = [];
@@ -124,7 +119,6 @@ class ApiServices {
       state.isLoggedIn = true;
       state.name = connectedasso[0].name;
       state.id = connectedasso[0].id;
-      print(state.name);
     }
   }
 }
